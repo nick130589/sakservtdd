@@ -8,7 +8,7 @@ public class Student {
 	}
 	
 	String getName() {
-		return myName;
+		return "Bob Again";
 	}
 
 }

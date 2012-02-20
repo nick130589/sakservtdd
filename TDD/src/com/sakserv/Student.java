@@ -1,14 +1,14 @@
 package com.sakserv;
 
 public class Student {
-	String myName;
+	private String name;
 	
 	Student(String name){
-		myName = name;
+		this.name = name;
 	}
 	
 	String getName() {
-		return myName;
+		return name;
 	}
 
 }

@@ -8,14 +8,14 @@ public class StudentTest {
 
 	@Test
 	public void testCreate() {
-		Student student = new Student("Jane Doe");
-		String studentName = student.getName();
-		assertEquals("Jane Doe", studentName);
+		final String firstStudentName = "Jane Doe";
+		Student firstStudent = new Student(firstStudentName);
+		assertEquals("Jane Doe", firstStudent.getName());
 		
-		Student student2 = new Student("Joe Blow");
-		String student2Name = student2.getName();
-		assertEquals("Joe Blow", student2Name);
+		final String secondStudentName = "Joe Blow";
+		Student secondStudent = new Student(secondStudentName);
+		assertEquals("Joe Blow", secondStudent.getName());
 		
-		assertEquals("Jane Doe", student.getName());
+		assertEquals("Jane Doe", firstStudent.getName());
 	}
 }

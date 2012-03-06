@@ -2,6 +2,8 @@ package com.sakserv;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +15,13 @@ public class CourseSessionTest {
 	public void setUp(){
 		final String DEPARTMENT = "ENGL";
 		final String NUMBER = "101";
-		session = new CourseSession(DEPARTMENT, NUMBER);
+		
+		final int YEAR = 103;
+		final int MONTH = 0;
+		final int DATE = 6;
+		Date startDate = new Date(YEAR, MONTH, DATE);
+		
+		session = new CourseSession(DEPARTMENT, NUMBER, startDate);
 	}
 
 	@Test
@@ -39,6 +47,22 @@ public class CourseSessionTest {
 		assertEquals(student1, session.get(0));
 		assertEquals(student2, session.get(1));
 		
+	}
+	
+	@Test
+	public void testCourseDates() {
+		int year = 103;
+		int month = 0;
+		int date = 6;
+		Date startDate = new Date(year, month, date);
+		assertEquals(startDate, session.getStartDate());
+		
+		year = 103;
+		month = 3;
+		date = 25;
+		
+		Date sixteenWeeksOut = new Date(year, month, date);
+		assertEquals(sixteenWeeksOut, session.getEndDate());
 	}
 
 }

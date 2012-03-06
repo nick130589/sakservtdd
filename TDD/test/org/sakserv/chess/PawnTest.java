@@ -1,8 +1,9 @@
-package com.sakserv;
+package org.sakserv.chess;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.sakserv.chess.Pawn;
 
 public class PawnTest {
 
@@ -18,6 +19,11 @@ public class PawnTest {
 		Pawn blackPawn = new Pawn();
 		blackPawn.setColor(blackPawnColor);
 		assertEquals("black", blackPawn.getColor());
+	}
+	
+	@Test
+	public void testCreatePawnNoColor() {
+		Pawn noColorPawn = new Pawn();
 	}
 
 }

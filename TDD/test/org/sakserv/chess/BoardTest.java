@@ -12,20 +12,14 @@ public class BoardTest {
 
 	@Test
 	public void testCreate() {
+		
+		// Create Board object and currentPieces array
 		Board board = new Board();
 		ArrayList<Pawn> currentPieces = board.getCurrentPieces();
 		
-		assertEquals(0, board.getNumberOfPieces());
-		
-		// Add white pawn
-		Pawn whitePawn = board.addPawn(Pawn.WHITE);
-		assertEquals(1, board.getNumberOfPieces());
-		assertEquals(whitePawn, currentPieces.get(0));
-		
-		// Add black pawn
-		Pawn blackPawn = board.addPawn(Pawn.BLACK);
-		assertEquals(2, board.getNumberOfPieces());
-		assertEquals(blackPawn, currentPieces.get(1));
+		// Get number of peices, assume 16 at start
+		assertEquals(16, board.getNumberOfPieces());
+		assertEquals(16, currentPieces.size());
 		
 	}
 

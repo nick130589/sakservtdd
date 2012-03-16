@@ -28,5 +28,13 @@ public class Pawn {
 	public String getColor(){
 		return color;
 	}
+	
+	public String toString() {
+		if (getColor() == WHITE) {
+			return "p";
+		} else {
+			return "P";
+		}
+	}
 
 }

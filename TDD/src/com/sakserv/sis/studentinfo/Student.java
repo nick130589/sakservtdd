@@ -1,6 +1,7 @@
 package com.sakserv.sis.studentinfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
 	
@@ -10,14 +11,12 @@ public class Student {
 	private String name;
 	private int creditHoursEnrolled;
 	private String residentState = "";
-	private ArrayList<String> grades = new ArrayList<String>();
 	
-	public static final String GRADE_A = "A";
-	public static final String GRADE_B = "B";
-	public static final String GRADE_C = "C";
-	public static final String GRADE_D = "D";
-	public static final String GRADE_F = "F";
-
+	enum Grade {A, B, C, D, F };
+	private List<Grade> grades = new ArrayList<Grade>();
+	
+	private GradingStrategy gradingStrategy = new RegularGradingStrategy();
+	
 	
 	public Student(String name){
 		this.name = name;
@@ -48,7 +47,7 @@ public class Student {
 		return residentState.equals(Student.IN_STATE);
 	}
 	
-	public void addGrade(String grade) {
+	public void addGrade(Grade grade) {
 		grades.add(grade);
 	}
 	
@@ -58,20 +57,14 @@ public class Student {
 			return total;
 		}
 		
-		for (String grade: grades) {
-			total += getGradePointsForLetterGrade(grade);
+		for (Grade grade: grades) {
+			total += gradingStrategy.getGradePointsFor(grade);
 		}
-		
 		return total / grades.size();
-		
 	}
 	
-	private int getGradePointsForLetterGrade(String grade) {
-		if (grade.equals(Student.GRADE_A))	return 4;
-		if (grade.equals(Student.GRADE_B)) 	return 3;
-		if (grade.equals(Student.GRADE_C))  return 2;
-		if (grade.equals(Student.GRADE_D))  return 1;
-		return 0;
+	void setGradingStrategy(GradingStrategy gradingStrategy) {
+		this.gradingStrategy = gradingStrategy;
 	}
 
 }

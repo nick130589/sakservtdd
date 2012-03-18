@@ -69,20 +69,42 @@ public class StudentTest {
 	public void testCalculateGpa() {
 		assertGpa(firstStudent, 0.0);
 		
-		firstStudent.addGrade(Student.GRADE_A);		
+		firstStudent.addGrade(Student.Grade.A);		
 		assertGpa(firstStudent, 4.0);
 		
-		firstStudent.addGrade(Student.GRADE_B);
+		firstStudent.addGrade(Student.Grade.B);
 		assertGpa(firstStudent, 3.5);
 		
-		firstStudent.addGrade(Student.GRADE_C);
+		firstStudent.addGrade(Student.Grade.C);
 		assertGpa(firstStudent, 3.0);
 		
-		firstStudent.addGrade(Student.GRADE_D);
+		firstStudent.addGrade(Student.Grade.D);
 		assertGpa(firstStudent, 2.5);
 		
-		firstStudent.addGrade(Student.GRADE_F);
+		firstStudent.addGrade(Student.Grade.F);
 		assertGpa(firstStudent, 2.0);
+	}
+	
+	@Test
+	public void testCalculateHonorsStudentGpa() {
+		assertGpa(createHonorsStudent(), 0.0);
+		assertGpa(createHonorsStudent(Student.Grade.A), 5.0);
+		assertGpa(createHonorsStudent(Student.Grade.B), 4.0);
+		assertGpa(createHonorsStudent(Student.Grade.C), 3.0);
+		assertGpa(createHonorsStudent(Student.Grade.D), 2.0);
+		assertGpa(createHonorsStudent(Student.Grade.F), 0.0);
+	}
+	
+	private Student createHonorsStudent(Student.Grade grade) {
+		Student student = createHonorsStudent();
+		student.addGrade(grade);
+		return student;
+	}
+	
+	private Student createHonorsStudent() {
+		Student student = new Student("a");
+		student.setGradingStrategy(new HonorsGradingStrategy());
+		return student;
 	}
 	
 	private void assertGpa(Student student, double expectedGpa) {

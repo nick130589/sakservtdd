@@ -2,10 +2,9 @@ package org.sakserv.chess;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
-import org.sakserv.chess.Board;
 
 
 public class BoardTest {
@@ -13,7 +12,7 @@ public class BoardTest {
 	@Test
 	public void testCreate() {
 		Board board = new Board();
-		ArrayList<Pawn> currentPieces = board.getCurrentPieces();
+		List<Pawn> currentPieces = board.getCurrentPieces();
 		
 		assertEquals(16, board.getNumberOfPieces());
 		

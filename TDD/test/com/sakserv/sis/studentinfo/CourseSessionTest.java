@@ -1,6 +1,7 @@
 package com.sakserv.sis.studentinfo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -8,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.sakserv.sis.DateUtil;
-import com.sakserv.sis.studentinfo.CourseSession;
-import com.sakserv.sis.studentinfo.Student;
 
 public class CourseSessionTest {
 	
@@ -66,6 +65,24 @@ public class CourseSessionTest {
 		assertEquals(1, CourseSession.getCount());
 		createCourseSession();
 		assertEquals(2, CourseSession.getCount());
+	}
+	
+	@Test
+	public void testCourseSessionComparable() {
+		final Date date = new Date();
+		CourseSession firstSession = CourseSession.create("CMSC", "101", date);
+		CourseSession secondSession = CourseSession.create("ENGL", "101", date);
+		
+		assertTrue(firstSession.compareTo(secondSession) < 0);
+		assertTrue(secondSession.compareTo(firstSession) > 0);
+		
+		CourseSession thirdSession = CourseSession.create("CMSC", "101", date);
+		assertEquals(0, firstSession.compareTo(thirdSession));
+		
+		CourseSession fourthSession = CourseSession.create("CMSC", "210", date);
+		assertTrue(thirdSession.compareTo(fourthSession) < 0);
+		assertTrue(fourthSession.compareTo(thirdSession) > 0);
+		
 	}
 	
 	private CourseSession createCourseSession() {

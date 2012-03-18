@@ -2,10 +2,10 @@ package com.sakserv.sis.report;
 
 import com.sakserv.sis.studentinfo.CourseSession;
 import com.sakserv.sis.studentinfo.Student;
+import static com.sakserv.sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporter {
 
-	public final static String NEWLINE = System.getProperty("line.seperator");
 	public final static String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
 	public final static String ROSTER_REPORT_FOOTER = NEWLINE + "# students = ";
 	

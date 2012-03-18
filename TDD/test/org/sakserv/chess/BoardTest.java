@@ -15,17 +15,17 @@ public class BoardTest {
 		Board board = new Board();
 		ArrayList<Pawn> currentPieces = board.getCurrentPieces();
 		
-		assertEquals(0, board.getNumberOfPieces());
+		assertEquals(16, board.getNumberOfPieces());
 		
 		// Add white pawn
 		Pawn whitePawn = board.addPawn(Pawn.WHITE);
-		assertEquals(1, board.getNumberOfPieces());
-		assertEquals(whitePawn, currentPieces.get(0));
+		assertEquals(17, board.getNumberOfPieces());
+		assertEquals(whitePawn, currentPieces.get(16));
 		
 		// Add black pawn
 		Pawn blackPawn = board.addPawn(Pawn.BLACK);
-		assertEquals(2, board.getNumberOfPieces());
-		assertEquals(blackPawn, currentPieces.get(1));
+		assertEquals(18, board.getNumberOfPieces());
+		assertEquals(blackPawn, currentPieces.get(17));
 		
 	}
 

@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  * @author Shane Kumpf
  *
  */
-public class CourseSession {
+public class CourseSession implements Comparable<CourseSession> {
 	
 	// Class
 	private static int count = 0;
@@ -47,6 +47,24 @@ public class CourseSession {
 		students.add(student);
 	}
 	
+	public String getDepartmentCode(){
+		return departmentCode;
+	}
+	
+	public String getCourseNumber(){
+		return courseNumber;
+	}
+	
+	public int compareTo(CourseSession session) {
+		int compare = this.getDepartmentCode().compareTo(session.getDepartmentCode());
+		
+		// Dept code matches, check course number
+		if (compare == 0) {
+			compare = this.getCourseNumber().compareTo(session.getCourseNumber());
+		}
+		return compare;
+	}
+	
 	// Package class methods
 	static int getCount() {
 		return count;
@@ -61,13 +79,6 @@ public class CourseSession {
 	}
 	
 	// Package instance methods
-	String getDepartmentCode(){
-		return departmentCode;
-	}
-	
-	String getCourseNumber(){
-		return courseNumber;
-	}
 	
 	int getNumberOfStudents(){
 		return students.size();

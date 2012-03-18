@@ -10,6 +10,7 @@ import com.sakserv.sis.DateUtil;
 import com.sakserv.sis.report.RosterReporter;
 import com.sakserv.sis.studentinfo.CourseSession;
 import com.sakserv.sis.studentinfo.Student;
+import static com.sakserv.sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest {
 
@@ -24,9 +25,9 @@ public class RosterReporterTest {
 		String rosterReport = new RosterReporter(session).getReport();
 		
 		assertEquals(RosterReporter.ROSTER_REPORT_HEADER + 
-		  "A" + RosterReporter.NEWLINE +
-		  "B" + RosterReporter.NEWLINE + 
+		  "A" + NEWLINE +
+		  "B" + NEWLINE + 
 		  RosterReporter.ROSTER_REPORT_FOOTER + 
-		  "2" + RosterReporter.NEWLINE, rosterReport);
+		  "2" + NEWLINE, rosterReport);
 	}
 }

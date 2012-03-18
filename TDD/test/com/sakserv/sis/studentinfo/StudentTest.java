@@ -17,6 +17,8 @@ public class StudentTest {
 	
 	private Student firstStudent, secondStudent;
 	
+	private static final double GRADE_TOLERANCE = 0.05;
+	
 	@Before
 	public void setUp() {
 		firstStudent = new Student(FIRST_STUDENT_NAME);
@@ -33,10 +35,13 @@ public class StudentTest {
 	@Test
 	public void testAddCreditHours() {
 		assertEquals(0, firstStudent.getCreditHours());
+	
 		firstStudent.addCreditHours(FIRST_STUDENT_HOURS);
 		assertEquals(3, firstStudent.getCreditHours());
+		
 		firstStudent.addCreditHours(FIRST_STUDENT_HOURS + FIRST_STUDENT_HOURS);
 		assertEquals(9, firstStudent.getCreditHours());
+		
 		firstStudent.addCreditHours(FIRST_STUDENT_HOURS);
 		assertEquals(12, firstStudent.getCreditHours());
 		
@@ -48,4 +53,39 @@ public class StudentTest {
 		assertFalse(secondStudent.isFullTime());
 	}
 	
+	@Test
+	public void testInState() {
+		assertFalse(firstStudent.isInState());
+		firstStudent.setResidentState(Student.IN_STATE);
+		assertTrue(firstStudent.isInState());
+		firstStudent.setResidentState("MD");
+		assertFalse(firstStudent.isInState());
+		
+		firstStudent.setResidentState("co");
+		assertTrue(firstStudent.isInState());
+	}
+	
+	@Test
+	public void testCalculateGpa() {
+		assertGpa(firstStudent, 0.0);
+		
+		firstStudent.addGrade(Student.GRADE_A);		
+		assertGpa(firstStudent, 4.0);
+		
+		firstStudent.addGrade(Student.GRADE_B);
+		assertGpa(firstStudent, 3.5);
+		
+		firstStudent.addGrade(Student.GRADE_C);
+		assertGpa(firstStudent, 3.0);
+		
+		firstStudent.addGrade(Student.GRADE_D);
+		assertGpa(firstStudent, 2.5);
+		
+		firstStudent.addGrade(Student.GRADE_F);
+		assertGpa(firstStudent, 2.0);
+	}
+	
+	private void assertGpa(Student student, double expectedGpa) {
+		assertEquals(expectedGpa, student.getGpa(), StudentTest.GRADE_TOLERANCE);
+	}
 }

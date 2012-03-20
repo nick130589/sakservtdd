@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sakserv.sis.report.HonorsGradingStrategy;
+
 public class StudentTest {
 	
 	private final String FIRST_STUDENT_NAME = "Jane Doe";

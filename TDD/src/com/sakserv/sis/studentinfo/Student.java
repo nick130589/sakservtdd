@@ -3,6 +3,9 @@ package com.sakserv.sis.studentinfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sakserv.sis.report.BasicGradingStrategy;
+import com.sakserv.sis.report.GradingStrategy;
+
 public class Student {
 	
 	private static final int MIN_FULL_TIME_CREDITS = 12;
@@ -12,10 +15,27 @@ public class Student {
 	private int creditHoursEnrolled;
 	private String residentState = "";
 	
-	enum Grade {A, B, C, D, F };
+	public enum Grade {
+		A(4), 
+		B(3), 
+		C(2),
+		D(1),
+		F(0);
+		
+		private int points;
+		
+		Grade(int points) {
+			this.points = points;
+		}
+		
+		public int getPoints() {
+			return points;
+		}
+	};
+	
 	private List<Grade> grades = new ArrayList<Grade>();
 	
-	private GradingStrategy gradingStrategy = new RegularGradingStrategy();
+	private GradingStrategy gradingStrategy = new BasicGradingStrategy();
 	
 	
 	public Student(String name){

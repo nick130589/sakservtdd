@@ -79,4 +79,29 @@ abstract public class SessionTest {
 		assertTrue(fourthSession.compareTo(thirdSession) > 0);
 		
 	}
+	
+	@Test
+	public void testAverageGpaForPartTimeStudents() {
+		session.enroll(createFullTimeStudent());
+		
+		Student partTimer1 = new Student("1");
+		partTimer1.addGrade(Student.Grade.A);
+		session.enroll(partTimer1);
+		
+		session.enroll(createFullTimeStudent());
+		
+		Student partTimer2 = new Student("2");
+		partTimer2.addGrade(Student.Grade.B);
+		session.enroll(partTimer2);
+		
+		assertEquals(3.5, session.averageGpaForPartTimeStudents(), 0.05);
+		
+		
+	}
+	
+	private Student createFullTimeStudent() {
+		Student student = new Student("a");
+		student.addCreditHours(Student.MIN_FULL_TIME_CREDITS);
+		return student;
+	}
 }

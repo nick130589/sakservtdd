@@ -8,7 +8,7 @@ import com.sakserv.sis.report.GradingStrategy;
 
 public class Student {
 	
-	private static final int MIN_FULL_TIME_CREDITS = 12;
+	public static final int MIN_FULL_TIME_CREDITS = 12;
 	public static final String IN_STATE = "CO";
 	
 	private String name;

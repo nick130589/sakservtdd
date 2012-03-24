@@ -15,6 +15,11 @@ public class Student {
 	private int creditHoursEnrolled;
 	private String residentState = "";
 	
+	private String firstName = "";
+	private String middleName = "";
+	private String lastName = "";
+	
+	
 	public enum Grade {
 		A(4), 
 		B(3), 
@@ -37,10 +42,54 @@ public class Student {
 	
 	private GradingStrategy gradingStrategy = new BasicGradingStrategy();
 	
+	public Student(String fullName){
+		name = fullName;
+		creditHoursEnrolled = 0;
+		List<String> nameParts = split(fullName);
+		System.out.println(nameParts.toString());
+		setName(nameParts);
+	}
 	
-	public Student(String name){
-		this.name = name;
-		this.creditHoursEnrolled = 0;
+	private void setName(List<String> nameParts) {
+		this.lastName = removeLast(nameParts);
+		String nextName = removeLast(nameParts);
+		if (nameParts.isEmpty()) {
+			this.firstName = nextName;
+		} else {
+			this.middleName = nextName;
+			this.lastName = removeLast(nameParts);
+		}
+	}
+	
+	private String removeLast(List<String> list) {
+		if (list.isEmpty()) {
+			return "";
+		}
+		return list.remove(list.size() - 1);
+	}
+	
+	private List<String> split(String fullName) {
+		List<String> results = new ArrayList<String>();
+		
+		StringBuffer word = new StringBuffer();
+		int index = 0;
+		while (index < fullName.length()) {
+			char ch = fullName.charAt(index);
+			if (!Character.isWhitespace(ch)) {
+				word.append(ch);
+			} else {
+				if (word.length() > 0) {
+					results.add(word.toString());
+					word = new StringBuffer();
+				}
+			}
+			index++;
+		}
+		
+		if (word.length() > 0) {
+			results.add(word.toString());
+		}
+		return results;
 	}
 	
 	public String getName() {
@@ -58,6 +107,20 @@ public class Student {
 	public int getCreditHours() {
 		return creditHoursEnrolled;
 	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getMiddleName() {
+		return middleName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	
 	
 	public void setResidentState(String stateAbbreviation) {
 		this.residentState = stateAbbreviation.toUpperCase();

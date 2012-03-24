@@ -1,10 +1,6 @@
 package com.sakserv.sis.studentinfo;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 
 /**
@@ -13,24 +9,10 @@ import java.util.List;
  * @author Shane Kumpf
  *
  */
-public class CourseSession implements Comparable<CourseSession> {
+public class CourseSession extends Session {
 	
 	// Class
 	private static int count = 0;
-	
-	// Instance
-	private String departmentCode;
-	private String courseNumber;
-	private Date startDate;
-	private List<Student> students = new ArrayList<Student>();
-	private int numberOfCredits;
-	
-	
-	private CourseSession(String departmentCode, String courseNumber, Date startDate) {
-		this.departmentCode = departmentCode;
-		this.courseNumber = courseNumber;
-		this.startDate = startDate;
-	}
 	
 	// Factory
 	public static CourseSession create(String departmentCode, String courseNumber, Date startDate) {
@@ -38,32 +20,8 @@ public class CourseSession implements Comparable<CourseSession> {
 		return new CourseSession(departmentCode, courseNumber, startDate);
 	}
 	
-	// Public
-	public List<Student> getAllStudents() {
-		return students;
-	}
-	
-	public void enroll(Student student){
-		student.addCreditHours(numberOfCredits);
-		students.add(student);
-	}
-	
-	public String getDepartmentCode(){
-		return departmentCode;
-	}
-	
-	public String getCourseNumber(){
-		return courseNumber;
-	}
-	
-	public int compareTo(CourseSession session) {
-		int compare = this.getDepartmentCode().compareTo(session.getDepartmentCode());
-		
-		// Dept code matches, check course number
-		if (compare == 0) {
-			compare = this.getCourseNumber().compareTo(session.getCourseNumber());
-		}
-		return compare;
+	protected CourseSession(String departmentCode, String courseNumber, Date startDate) {
+		super(departmentCode, courseNumber, startDate);
 	}
 	
 	// Package class methods
@@ -79,30 +37,7 @@ public class CourseSession implements Comparable<CourseSession> {
 		count++;
 	}
 	
-	// Package instance methods
-	
-	int getNumberOfStudents(){
-		return students.size();
-	}
-	
-	Student getStudentByIndex(int index){
-		return students.get(index);
-	}
-	
-	Date getStartDate() {
-		return startDate;
-	}
-	
-	Date getEndDate() {
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.setTime(startDate);
-		int numberOfDays = 16 * 7 - 3; // weeks * days per week - 3
-		calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-		return calendar.getTime();
-	}
-	
-	void setNumberOfCredits(int numberOfCredits) {
-		this.numberOfCredits = numberOfCredits;
-	}
-	
+	protected int getSessionLength() {
+		return 16;
+	}	
 }

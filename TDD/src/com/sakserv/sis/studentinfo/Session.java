@@ -1,18 +1,19 @@
 package com.sakserv.sis.studentinfo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
-abstract public class Session implements Comparable<Session> {
+abstract public class Session implements Comparable<Session>, Iterable<Student> {
 
 	// Instance
 	private String departmentCode;
 	private String courseNumber;
 	private Date startDate;
-	private List<Student> students = new ArrayList<Student>();
+	private List<Student> students = new Vector<Student>();
 	private int numberOfCredits;
 	
 	
@@ -78,6 +79,7 @@ abstract public class Session implements Comparable<Session> {
 	public double averageGpaForPartTimeStudents() {
 		double total = 0.0;
 		int count = 0;
+		
 		for (Student student: students) {
 			if (student.isFullTime()) {
 				continue;
@@ -85,10 +87,11 @@ abstract public class Session implements Comparable<Session> {
 			count++;
 			total += student.getGpa();
 		}
-		if (count == 0) {
-			return 0.0;
-		}
-		return total / count;
+		return count == 0 ? 0.0 : total / count;
+	}
+	
+	public Iterator<Student> iterator() {
+		return students.iterator();
 	}
 
 }

@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -95,6 +99,33 @@ public class StudentTest {
 		assertGpa(createHonorsStudent(Student.Grade.C), 3.0);
 		assertGpa(createHonorsStudent(Student.Grade.D), 2.0);
 		assertGpa(createHonorsStudent(Student.Grade.F), 0.0);
+	}
+	
+	@Test
+	@SuppressWarnings("all")
+	public void testCasting() {
+		List students = new ArrayList();
+		students.add(new Student("a"));
+		students.add(new Student("b"));
+		
+		List names = new ArrayList();
+		Iterator it = students.iterator();
+		while (it.hasNext()) {
+			Student student = (Student)it.next();
+			names.add(student.getLastName());
+		}
+		
+		assertEquals("a", names.get(0));
+		assertEquals("b", names.get(1));
+	}
+	
+	@Test
+	public void testCharges() {
+		Student student = new Student("a");
+		student.addCharge(500);
+		student.addCharge(200);
+		student.addCharge(399);
+		assertEquals(1099, student.totalCharges());
 	}
 	
 	private Student createHonorsStudent(Student.Grade grade) {

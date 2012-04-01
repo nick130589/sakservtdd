@@ -1,7 +1,9 @@
 package com.sakserv.sis.studentinfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import com.sakserv.sis.report.BasicGradingStrategy;
 import com.sakserv.sis.report.GradingStrategy;
@@ -18,6 +20,8 @@ public class Student {
 	private String firstName = "";
 	private String middleName = "";
 	private String lastName = "";
+	
+	private List<Integer> charges = new ArrayList<Integer>();
 	
 	
 	public enum Grade {
@@ -46,7 +50,6 @@ public class Student {
 		name = fullName;
 		creditHoursEnrolled = 0;
 		List<String> nameParts = split(fullName);
-		System.out.println(nameParts.toString());
 		setName(nameParts);
 	}
 	
@@ -70,24 +73,8 @@ public class Student {
 	
 	private List<String> split(String fullName) {
 		List<String> results = new ArrayList<String>();
-		
-		StringBuffer word = new StringBuffer();
-		int index = 0;
-		while (index < fullName.length()) {
-			char ch = fullName.charAt(index);
-			if (!Character.isWhitespace(ch)) {
-				word.append(ch);
-			} else {
-				if (word.length() > 0) {
-					results.add(word.toString());
-					word = new StringBuffer();
-				}
-			}
-			index++;
-		}
-		
-		if (word.length() > 0) {
-			results.add(word.toString());
+		for (String name: fullName.split(" ")) {
+			results.add(name);
 		}
 		return results;
 	}
@@ -148,6 +135,18 @@ public class Student {
 	
 	void setGradingStrategy(GradingStrategy gradingStrategy) {
 		this.gradingStrategy = gradingStrategy;
+	}
+	
+	public void addCharge(int charge) {
+		charges.add(charge);
+	}
+	
+	public int totalCharges() {
+		int total = 0;
+		for (int charge: charges) {
+			total += charge;
+		}
+		return total;
 	}
 
 }

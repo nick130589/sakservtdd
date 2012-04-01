@@ -3,7 +3,9 @@ package com.sakserv.sis.studentinfo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -97,6 +99,23 @@ abstract public class SessionTest {
 		assertEquals(3.5, session.averageGpaForPartTimeStudents(), 0.05);
 		
 		
+	}
+	
+	@Test
+	public void testIterate() {
+		enrollStudents(session);
+		
+		List<Student> results = new ArrayList<Student>();
+		for (Student student: session) {
+			results.add(student);
+		}
+		assertEquals(session.getAllStudents(), results);
+	}
+	
+	private void enrollStudents(Session session) {
+		session.enroll(new Student("1"));
+		session.enroll(new Student("2"));
+		session.enroll(new Student("3"));
 	}
 	
 	private Student createFullTimeStudent() {

@@ -3,6 +3,7 @@ package com.sakserv.sis.studentinfo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -126,6 +127,17 @@ public class StudentTest {
 		student.addCharge(200);
 		student.addCharge(399);
 		assertEquals(1099, student.totalCharges());
+	}
+	
+	@Test
+	public void testBadlyFormattedName() {
+		try {
+			new Student("a b c d");
+			fail("Expected StudentNameFormatException on 4 part name");
+		}
+		catch (StudentNameFormatException success) {
+			
+		}
 	}
 	
 	private Student createHonorsStudent(Student.Grade grade) {

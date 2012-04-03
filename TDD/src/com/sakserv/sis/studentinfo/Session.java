@@ -1,5 +1,7 @@
 package com.sakserv.sis.studentinfo;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,6 +17,7 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 	private Date startDate;
 	private List<Student> students = new Vector<Student>();
 	private int numberOfCredits;
+	private URL url;
 	
 	
 	protected Session(String departmentCode, String courseNumber, Date startDate) {
@@ -92,6 +95,14 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 	
 	public Iterator<Student> iterator() {
 		return students.iterator();
+	}
+	
+	public void setUrl(String urlString) throws MalformedURLException {
+		this.url = new URL(urlString);
+	}
+	
+	public URL getUrl() {
+		return url;
 	}
 
 }

@@ -2,7 +2,9 @@ package com.sakserv.sis.studentinfo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -110,6 +112,25 @@ abstract public class SessionTest {
 			results.add(student);
 		}
 		assertEquals(session.getAllStudents(), results);
+	}
+	
+	@Test
+	public void testSessionUrl() throws MalformedURLException {
+		final String url = "http://course.langrsoft.com/cmsc300";
+		session.setUrl(url);
+		assertEquals(url, session.getUrl().toString());
+	}
+	
+	@Test
+	public void testInvalidSessionUrl() {
+		final String url = "httsp://course.langrsoft.com/cmsc300";
+		try {
+			session.setUrl(url);
+			fail("expected MalformedURLException due to bad protocol");
+		}
+		catch (MalformedURLException success) {
+			
+		}
 	}
 	
 	private void enrollStudents(Session session) {

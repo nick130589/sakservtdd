@@ -1,9 +1,7 @@
 package com.sakserv.sis.studentinfo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import com.sakserv.sis.report.BasicGradingStrategy;
 import com.sakserv.sis.report.GradingStrategy;
@@ -50,6 +48,12 @@ public class Student {
 		name = fullName;
 		creditHoursEnrolled = 0;
 		List<String> nameParts = split(fullName);
+		
+		final int maximumNumberOfNameParts = 3;
+		if (nameParts.size() > maximumNumberOfNameParts) {
+			throw new StudentNameFormatException();
+		}
+		
 		setName(nameParts);
 	}
 	

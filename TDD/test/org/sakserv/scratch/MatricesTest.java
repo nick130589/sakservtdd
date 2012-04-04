@@ -29,7 +29,6 @@ public class MatricesTest {
 		int[][] matrix = new int[rows][cols];
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				System.out.print(count + "  ");
 				matrix[row][col] = count++;
 			}
 		}

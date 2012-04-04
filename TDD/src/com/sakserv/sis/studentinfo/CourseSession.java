@@ -15,12 +15,14 @@ public class CourseSession extends Session {
 	private static int count = 0;
 	
 	// Factory
-	public static CourseSession create(String departmentCode, String courseNumber, Date startDate) {
+	public static CourseSession create(String departmentCode,
+			String courseNumber, Date startDate) {
 		CourseSession.incrementCount();
 		return new CourseSession(departmentCode, courseNumber, startDate);
 	}
 	
-	protected CourseSession(String departmentCode, String courseNumber, Date startDate) {
+	protected CourseSession(String departmentCode, String courseNumber,
+			Date startDate) {
 		super(departmentCode, courseNumber, startDate);
 	}
 	

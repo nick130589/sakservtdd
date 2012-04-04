@@ -9,7 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-abstract public class Session implements Comparable<Session>, Iterable<Student> {
+abstract public class Session implements Comparable<Session>, 
+	Iterable<Student> {
 
 	// Instance
 	private String departmentCode;
@@ -20,18 +21,21 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 	private URL url;
 	
 	
-	protected Session(String departmentCode, String courseNumber, Date startDate) {
+	protected Session(String departmentCode, String courseNumber,
+			Date startDate) {
 		this.departmentCode = departmentCode;
 		this.courseNumber = courseNumber;
 		this.startDate = startDate;
 	}
 	
 	public int compareTo(Session session) {
-		int compare = this.getDepartmentCode().compareTo(session.getDepartmentCode());
+		int compare = this.getDepartmentCode().compareTo(
+				session.getDepartmentCode());
 		
 		// Dept code matches, check course number
 		if (compare == 0) {
-			compare = this.getCourseNumber().compareTo(session.getCourseNumber());
+			compare = this.getCourseNumber().compareTo(
+					session.getCourseNumber());
 		}
 		return compare;
 	}
@@ -97,8 +101,18 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 		return students.iterator();
 	}
 	
-	public void setUrl(String urlString) throws MalformedURLException {
-		this.url = new URL(urlString);
+	public void setUrl(String urlString) throws SessionException {
+		try {
+			this.url = new URL(urlString);
+		}
+		catch (MalformedURLException e) {
+			log(e);
+			throw new SessionException(e);
+		}
+	}
+	
+	public void log(Exception e) {
+		e.printStackTrace();
 	}
 	
 	public URL getUrl() {

@@ -131,12 +131,15 @@ public class StudentTest {
 	
 	@Test
 	public void testBadlyFormattedName() {
+		final String studentName = "a b c d";
 		try {
-			new Student("a b c d");
+			new Student(studentName);
 			fail("Expected StudentNameFormatException on 4 part name");
 		}
-		catch (StudentNameFormatException success) {
-			
+		catch (StudentNameFormatException expectedException) {
+			assertEquals(String.format("Student name '%s' contains more " +
+					"than %d parts", studentName, Student.MAX_NAME_PARTS), 
+					expectedException.getMessage());
 		}
 	}
 	
@@ -153,6 +156,7 @@ public class StudentTest {
 	}
 	
 	private void assertGpa(Student student, double expectedGpa) {
-		assertEquals(expectedGpa, student.getGpa(), StudentTest.GRADE_TOLERANCE);
+		assertEquals(expectedGpa, student.getGpa(), 
+				StudentTest.GRADE_TOLERANCE);
 	}
 }

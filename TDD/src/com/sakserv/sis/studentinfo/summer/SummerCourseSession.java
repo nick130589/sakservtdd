@@ -6,11 +6,14 @@ import com.sakserv.sis.studentinfo.Session;
 
 public class SummerCourseSession extends Session {
 
-	public static SummerCourseSession create(String departmentCode, String courseNumber, Date startDate) {
-		return new SummerCourseSession(departmentCode, courseNumber, startDate);
+	public static SummerCourseSession create(String departmentCode,
+			String courseNumber, Date startDate) {
+		return new SummerCourseSession(departmentCode, courseNumber,
+				startDate);
 	}
 	
-	private SummerCourseSession(String departmentCode, String courseNumber, Date startDate) {
+	private SummerCourseSession(String departmentCode, String courseNumber,
+			Date startDate) {
 		super(departmentCode, courseNumber, startDate);
 	}
 	

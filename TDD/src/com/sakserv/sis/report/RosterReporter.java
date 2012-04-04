@@ -6,7 +6,8 @@ import static com.sakserv.sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporter {
 
-	public final static String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
+	public final static String ROSTER_REPORT_HEADER = "Student" +
+			NEWLINE + "-" + NEWLINE;
 	public final static String ROSTER_REPORT_FOOTER = NEWLINE + "# students = ";
 	
 	private CourseSession session;
@@ -37,7 +38,8 @@ public class RosterReporter {
 	}
 	
 	public void writeFooter(StringBuilder buffer) {
-		buffer.append(ROSTER_REPORT_FOOTER + session.getAllStudents().size() + NEWLINE);
+		buffer.append(ROSTER_REPORT_FOOTER + 
+				session.getAllStudents().size() + NEWLINE);
 	}
 	
 }

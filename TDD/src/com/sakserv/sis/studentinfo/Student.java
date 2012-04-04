@@ -10,6 +10,7 @@ public class Student {
 	
 	public static final int MIN_FULL_TIME_CREDITS = 12;
 	public static final String IN_STATE = "CO";
+	public static final int MAX_NAME_PARTS = 3;
 	
 	private String name;
 	private int creditHoursEnrolled;
@@ -51,7 +52,10 @@ public class Student {
 		
 		final int maximumNumberOfNameParts = 3;
 		if (nameParts.size() > maximumNumberOfNameParts) {
-			throw new StudentNameFormatException();
+			String message = "Student name '" + fullName + 
+					"' contains more than " + 
+					maximumNumberOfNameParts + " parts";
+			throw new StudentNameFormatException(message);
 		}
 		
 		setName(nameParts);

@@ -21,13 +21,16 @@ public class Board {
 	
 	public void initialize() {
 		ArrayList<Pawn> firstRank = new ArrayList<Pawn>();
-		firstRank = addPawnsToBoard(firstRank, Pawn.WHITE, STARTING_PIECE_COUNT/2);
+		firstRank = addPawnsToBoard(firstRank, Pawn.WHITE,
+				STARTING_PIECE_COUNT/2);
 		
 		ArrayList<Pawn> seventhRank = new ArrayList<Pawn>(); 
-		seventhRank = addPawnsToBoard(seventhRank, Pawn.BLACK, STARTING_PIECE_COUNT/2);
+		seventhRank = addPawnsToBoard(seventhRank, Pawn.BLACK,
+				STARTING_PIECE_COUNT/2);
 	}
 	
-	public ArrayList<Pawn> addPawnsToBoard(ArrayList<Pawn> boardRank, String color, int numberToAdd) {
+	public ArrayList<Pawn> addPawnsToBoard(ArrayList<Pawn> boardRank,
+			String color, int numberToAdd) {
 		for (int i = 0; i<numberToAdd; i++) {
 			boardRank.add(i, addPawn(color));
 		}

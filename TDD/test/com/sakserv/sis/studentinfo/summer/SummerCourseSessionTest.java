@@ -12,8 +12,10 @@ import com.sakserv.sis.studentinfo.SessionTest;
 
 public class SummerCourseSessionTest extends SessionTest {
 	
-	protected Session createSession(String departmentCode, String courseNumber, Date startDate) {
-		return SummerCourseSession.create(departmentCode, courseNumber, startDate);
+	protected Session createSession(String departmentCode, 
+			String courseNumber, Date startDate) {
+		return SummerCourseSession.create(departmentCode, 
+				courseNumber, startDate);
 	}
 
 	@Test

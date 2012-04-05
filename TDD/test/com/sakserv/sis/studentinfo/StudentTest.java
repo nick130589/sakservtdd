@@ -137,8 +137,8 @@ public class StudentTest {
 			fail("Expected StudentNameFormatException on 4 part name");
 		}
 		catch (StudentNameFormatException expectedException) {
-			assertEquals(String.format("Student name '%s' contains more " +
-					"than %d parts", studentName, Student.MAX_NAME_PARTS), 
+			assertEquals(String.format(Student.TOO_MANY_NAME_PARTS_MSG,
+					studentName, Student.MAX_NAME_PARTS), 
 					expectedException.getMessage());
 		}
 	}

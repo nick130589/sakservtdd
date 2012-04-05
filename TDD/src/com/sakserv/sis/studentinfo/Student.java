@@ -11,6 +11,8 @@ public class Student {
 	public static final int MIN_FULL_TIME_CREDITS = 12;
 	public static final String IN_STATE = "CO";
 	public static final int MAX_NAME_PARTS = 3;
+	public static final String TOO_MANY_NAME_PARTS_MSG = "Student name '%s'" +
+			"contains more than %d parts";
 	
 	private String name;
 	private int creditHoursEnrolled;
@@ -49,12 +51,9 @@ public class Student {
 		name = fullName;
 		creditHoursEnrolled = 0;
 		List<String> nameParts = split(fullName);
-		
-		final int maximumNumberOfNameParts = 3;
-		if (nameParts.size() > maximumNumberOfNameParts) {
-			String message = "Student name '" + fullName + 
-					"' contains more than " + 
-					maximumNumberOfNameParts + " parts";
+		if (nameParts.size() > MAX_NAME_PARTS) {
+			String message = String.format(TOO_MANY_NAME_PARTS_MSG,
+					fullName, MAX_NAME_PARTS);
 			throw new StudentNameFormatException(message);
 		}
 		

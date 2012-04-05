@@ -9,33 +9,29 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-abstract public class Session implements Comparable<Session>, 
+public abstract class Session extends Course implements Comparable<Session>, 
 	Iterable<Student> {
 
 	// Instance
-	private String departmentCode;
-	private String courseNumber;
+	private Course course;
 	private Date startDate;
 	private List<Student> students = new Vector<Student>();
 	private int numberOfCredits;
 	private URL url;
 	
-	
-	protected Session(String departmentCode, String courseNumber,
-			Date startDate) {
-		this.departmentCode = departmentCode;
-		this.courseNumber = courseNumber;
+	public Session(Course course, Date startDate) {
+		this.course = course;
 		this.startDate = startDate;
 	}
 	
 	public int compareTo(Session session) {
-		int compare = this.getDepartmentCode().compareTo(
-				session.getDepartmentCode());
+		int compare = this.getDepartment().compareTo(
+				session.getDepartment());
 		
 		// Dept code matches, check course number
 		if (compare == 0) {
-			compare = this.getCourseNumber().compareTo(
-					session.getCourseNumber());
+			compare = this.getNumber().compareTo(
+					session.getNumber());
 		}
 		return compare;
 	}
@@ -44,12 +40,12 @@ abstract public class Session implements Comparable<Session>,
 		this.numberOfCredits = numberOfCredits;
 	}
 	
-	public String getDepartmentCode(){
-		return departmentCode;
+	public String getDepartment(){
+		return course.department;
 	}
 	
-	public String getCourseNumber(){
-		return courseNumber;
+	public String getNumber(){
+		return course.number;
 	}
 	
 	int getNumberOfStudents(){

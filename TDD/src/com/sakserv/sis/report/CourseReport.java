@@ -20,8 +20,8 @@ public class CourseReport {
 		Collections.sort(sessions);
 		StringBuilder builder = new StringBuilder();
 		for (CourseSession session: sessions) {
-			builder.append(session.getDepartmentCode() + " " +
-						   session.getCourseNumber() + NEWLINE);
+			builder.append(session.getDepartment() + " " +
+						   session.getNumber() + NEWLINE);
 		}
 		return builder.toString();
 	}

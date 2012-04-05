@@ -1,8 +1,9 @@
 package com.sakserv.sis.report;
 
-import com.sakserv.sis.studentinfo.CourseSession;
-import com.sakserv.sis.studentinfo.Student;
 import static com.sakserv.sis.report.ReportConstant.NEWLINE;
+
+import com.sakserv.sis.studentinfo.Session;
+import com.sakserv.sis.studentinfo.Student;
 
 public class RosterReporter {
 
@@ -10,9 +11,9 @@ public class RosterReporter {
 			NEWLINE + "-" + NEWLINE;
 	public final static String ROSTER_REPORT_FOOTER = NEWLINE + "# students = ";
 	
-	private CourseSession session;
+	private Session session;
 	
-	public RosterReporter(CourseSession session) {
+	public RosterReporter(Session session) {
 		this.session = session;
 	}
 	

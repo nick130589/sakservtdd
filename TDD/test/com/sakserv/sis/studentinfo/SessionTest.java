@@ -25,17 +25,17 @@ abstract public class SessionTest {
 	
 	@Before
 	public void setUp() {
-		session = createSession(DEPARTMENT_CODE, COURSE_NUMBER, START_DATE);
+		session = createSession(new Course(DEPARTMENT_CODE, COURSE_NUMBER),
+				START_DATE);
 		session.setNumberOfCredits(COURSE_CREDITS);
 	}
 	
-	abstract protected Session createSession(String departmentCode,
-			String courseNumber, Date startDate);
+	abstract protected Session createSession(Course course, Date startDate);
 	
 	@Test
 	public void testCreate() {
-		assertEquals(DEPARTMENT_CODE, session.getDepartmentCode());
-		assertEquals(COURSE_NUMBER, session.getCourseNumber());
+		assertEquals(DEPARTMENT_CODE, session.getDepartment());
+		assertEquals(COURSE_NUMBER, session.getNumber());
 		assertEquals(0, session.getNumberOfStudents());
 		assertEquals(START_DATE, session.getStartDate());
 		
@@ -70,16 +70,16 @@ abstract public class SessionTest {
 	@Test
 	public void testSessionComparable() {
 		final Date date = new Date();
-		Session firstSession = createSession("CMSC", "101", date);
-		Session secondSession = createSession("ENGL", "101", date);
+		Session firstSession = createSession(new Course("CMSC", "101"), date);
+		Session secondSession = createSession(new Course("ENGL", "101"), date);
 		
 		assertTrue(firstSession.compareTo(secondSession) < 0);
 		assertTrue(secondSession.compareTo(firstSession) > 0);
 		
-		Session thirdSession = createSession("CMSC", "101", date);
+		Session thirdSession = createSession(new Course("CMSC", "101"), date);
 		assertEquals(0, firstSession.compareTo(thirdSession));
 		
-		Session fourthSession = createSession("CMSC", "210", date);
+		Session fourthSession = createSession(new Course("CMSC", "210"), date);
 		assertTrue(thirdSession.compareTo(fourthSession) < 0);
 		assertTrue(fourthSession.compareTo(thirdSession) > 0);
 		

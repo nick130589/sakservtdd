@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.sakserv.sis.studentinfo.Course;
 import com.sakserv.sis.studentinfo.CourseSession;
 
 
@@ -16,11 +17,11 @@ public class CoureReportTest {
 	public void testReport() {
 		final Date date = new Date();
 		CourseReport report = new CourseReport();
-		report.add(CourseSession.create("ENGL", "101", date));
-		report.add(CourseSession.create("CZEC", "200", date));
-		report.add(CourseSession.create("ITAL", "410", date));
-		report.add(CourseSession.create("CZEC", "220", date));
-		report.add(CourseSession.create("ITAL", "330", date));
+		report.add(CourseSession.create(new Course("ENGL", "101"), date));
+		report.add(CourseSession.create(new Course("CZEC", "200"), date));
+		report.add(CourseSession.create(new Course("ITAL", "410"), date));
+		report.add(CourseSession.create(new Course("CZEC", "220"), date));
+		report.add(CourseSession.create(new Course("ITAL", "330"), date));
 		
 		assertEquals("CZEC 200" + NEWLINE +
 					 "CZEC 220" + NEWLINE +

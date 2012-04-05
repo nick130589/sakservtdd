@@ -16,8 +16,7 @@ public class CourseSessionTest extends SessionTest {
 	
 	@Test
 	public void testCourseDate() {
-		Session session = createSession(DEPARTMENT_CODE, 
-				COURSE_NUMBER, START_DATE);
+		Session session = createSession(createCourse(), START_DATE);
 		Date sixteenWeeksOut = DateUtil.createDate(2003, 4, 25);
 		assertEquals(sixteenWeeksOut, session.getEndDate());
 	}
@@ -27,15 +26,17 @@ public class CourseSessionTest extends SessionTest {
 		CourseSession.resetCount();
 		assertEquals(0, CourseSession.getCount());
 		
-		createSession(DEPARTMENT_CODE, COURSE_NUMBER, START_DATE);
+		createSession(createCourse(), START_DATE);
 		assertEquals(1, CourseSession.getCount());
-		createSession(DEPARTMENT_CODE, COURSE_NUMBER, START_DATE);
+		createSession(createCourse(), START_DATE);
 		assertEquals(2, CourseSession.getCount());
 	}
 	
+	protected Session createSession(Course course, Date startDate) {
+		return CourseSession.create(course, startDate);
+	}
 	
-	protected Session createSession(String departmentCode, 
-			String courseNumber, Date startDate) {
-		return CourseSession.create(departmentCode, courseNumber, startDate);
+	private Course createCourse() {
+		return new Course(DEPARTMENT_CODE, COURSE_NUMBER);
 	}
 }

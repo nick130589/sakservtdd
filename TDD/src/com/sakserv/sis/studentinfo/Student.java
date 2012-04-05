@@ -22,6 +22,8 @@ public class Student {
 	private String middleName = "";
 	private String lastName = "";
 	
+	private String studentId = "";
+	
 	private List<Integer> charges = new ArrayList<Integer>();
 	
 	
@@ -154,6 +156,14 @@ public class Student {
 			total += charge;
 		}
 		return total;
+	}
+	
+	public void setId(String studentId) {
+		this.studentId = studentId;
+	}
+	
+	public String getId() {
+		return studentId;
 	}
 
 }

@@ -143,6 +143,25 @@ public class StudentTest {
 		}
 	}
 	
+	@Test
+	public void testFlags() {
+		Student student = new Student("a");
+		student.set(Student.Flag.ON_CAMPUS, Student.Flag.TAX_EXEMPT,
+				Student.Flag.MINOR);
+		
+		assertTrue(student.isOn(Student.Flag.ON_CAMPUS));
+		assertTrue(student.isOn(Student.Flag.TAX_EXEMPT));
+		assertTrue(student.isOn(Student.Flag.MINOR));
+		
+		student.unset(Student.Flag.ON_CAMPUS);
+		
+		assertTrue(student.isOff(Student.Flag.ON_CAMPUS));
+		assertTrue(student.isOn(Student.Flag.TAX_EXEMPT));
+		assertTrue(student.isOn(Student.Flag.MINOR));
+		
+		
+	}
+	
 	private Student createHonorsStudent(Student.Grade grade) {
 		Student student = createHonorsStudent();
 		student.addGrade(grade);

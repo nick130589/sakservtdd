@@ -1,6 +1,7 @@
 package com.sakserv.sis.studentinfo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,13 @@ public class PerformanceTest {
 		
 		performance.setScores(100, 90);
 		assertEquals(95.0, performance.average(), tolerance);
+	}
+	
+	@Test
+	public void testAverageForNoScores() {
+		Performance performance = new Performance();
+		assertEquals(0.0, performance.average(), tolerance);
+		assertFalse(Double.isNaN(performance.average()));
 	}
 
 }

@@ -25,6 +25,7 @@ public class CourseTest {
 		Course courseA = new Course("CMSC", "120");
 		Course courseAPrime = new Course("CMSC", "120");
 		Course courseAPrime2 = new Course("CMSC", "120");
+		
 		assertEquals(courseA, courseAPrime);
 		
 		Course courseB = new Course("ARTH", "330");
@@ -52,16 +53,49 @@ public class CourseTest {
 		List<Course> list = new ArrayList<Course>();
 		list.add(courseA);
 		assertTrue(list.contains(courseAPrime));
+	}
+	
+	@Test
+	public void testHashCodes() {
+		Course courseA = new Course("CMSC", "120");
+		Course courseAPrime = new Course("CMSC", "120");
 		
-		Map<Course, String> map = new HashMap<Course, String>();
-		map.put(courseA, "");
-		assertTrue(map.containsKey(courseAPrime));
+		assertEquals(courseA.hashCode(), courseAPrime.hashCode());
+		
+		// Consistency
+		assertEquals(courseA.hashCode(), courseA.hashCode());
 	}
 	
 	@Test
 	public void testApplesAndOranges() {
 		Course courseA = new Course("CMSC", "120");
 		assertFalse(courseA.equals("CMSC-120"));
+	}
+	
+	@Test
+	public void testHashCodePerformance() {
+		final int count = 10000;
+		long start = System.currentTimeMillis();
+		
+		Map<Course,String> map = new HashMap<Course,String>();
+		
+		for (int i = 0; i<count; i++) {
+			Course course = new Course("C" + i, "" + i);
+			map.put(course, "");
+		}
+		
+		long stop = System.currentTimeMillis();
+		long elapsed = stop - start;
+		final long arbitraryThreshold = 200;	
+		assertTrue("elapsed time = " + elapsed, elapsed < arbitraryThreshold);
+		
+	}
+	
+	@Test
+	public void testToString() {
+		Course course = new Course("ENGL", "301");
+		assertEquals("ENGL 301", course.toString());
+		assertEquals("SPAN 420", "" + new Course("SPAN", "420"));
 	}
 
 }

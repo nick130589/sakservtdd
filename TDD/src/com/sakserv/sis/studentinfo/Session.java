@@ -48,7 +48,7 @@ public abstract class Session extends Course implements Comparable<Session>,
 		return course.number;
 	}
 	
-	int getNumberOfStudents(){
+	public int getNumberOfStudents(){
 		return students.size();
 	}
 	

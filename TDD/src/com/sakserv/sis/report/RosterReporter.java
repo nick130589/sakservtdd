@@ -2,6 +2,8 @@ package com.sakserv.sis.report;
 
 import static com.sakserv.sis.report.ReportConstant.NEWLINE;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -28,6 +30,16 @@ public class RosterReporter {
 		writeFooter();
 	}
 	
+	public void writeReport(String filename) throws IOException {
+		Writer bufferedWriter = new BufferedWriter(new FileWriter(filename));
+		try {
+			writeReport(bufferedWriter);
+		}
+		finally {
+			bufferedWriter.close();
+		}
+	}
+	
 	public void writeHeader() throws IOException {
 		writer.write(ROSTER_REPORT_HEADER);
 	}
@@ -40,7 +52,7 @@ public class RosterReporter {
 	
 	public void writeFooter() throws IOException {
 		writer.write(ROSTER_REPORT_FOOTER + 
-				session.getAllStudents().size() + NEWLINE);
+				session.getNumberOfStudents() + NEWLINE);
 	}
 	
 }

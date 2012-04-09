@@ -1,8 +1,9 @@
 package com.sakserv.sis.report;
 
-import static com.sakserv.sis.report.ReportConstant.NEWLINE;
 import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -35,19 +36,30 @@ public class RosterReporterTest {
 		
 		Writer writer = new StringWriter();
 		new RosterReporter(session).writeReport(writer);
+		assertReportContents(writer.toString());
+	}
+	
+	@Test
+	public void testFiledReport() throws IOException {
+		final String filename = "testFileReport.txt";
+		new RosterReporter(session).writeReport(filename);
 		
-		String rosterReport = writer.toString();
+		StringBuffer buffer = new StringBuffer();
+		String line;
 		
-		assertEquals(RosterReporter.ROSTER_REPORT_HEADER + 
-		  "A" + NEWLINE +
-		  "B" + NEWLINE + 
-		  RosterReporter.ROSTER_REPORT_FOOTER + 
-		  "2" + NEWLINE, rosterReport);
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		while ((line = reader.readLine()) != null) {
+			buffer.append(String.format(line + "%n"));
+		}
+		reader.close();
+		assertReportContents(buffer.toString());
+		
 	}
 	
 	public void assertReportContents(String rosterReport) {
+System.out.println(session.getNumberOfStudents());
 		assertEquals(String.format(RosterReporter.ROSTER_REPORT_HEADER +
-				"A%n" + "B%n" + RosterReporter.ROSTER_REPORT_FOOTER,
-				session.getNumberOfStudents()), rosterReport);
+				"A%n" + "B%n" + RosterReporter.ROSTER_REPORT_FOOTER +
+				session.getNumberOfStudents() + "%n"), rosterReport);
 	}
 }

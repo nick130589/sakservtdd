@@ -34,8 +34,6 @@ public class BitOperationsTest {
 	public void testLogicalNegation() {
 		int x = 0x7FFFFFF1; // 2147483633 0111_1111_1111_1111_1111_1111_1111_0001
 		int y = 0x8000000E; // -2147483633 1000_0000_0000_0000_0000_0000_0000_1110
-		System.out.println("" + ~x);
-		System.out.println("" + y);
 		assertEquals(y, ~x);
 	}
 

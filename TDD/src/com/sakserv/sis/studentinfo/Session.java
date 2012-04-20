@@ -40,6 +40,10 @@ public abstract class Session extends Course implements Comparable<Session>,
 		this.numberOfCredits = numberOfCredits;
 	}
 	
+	public int getNumberOfCredits() {
+		return numberOfCredits;
+	}
+	
 	public String getDepartment(){
 		return course.department;
 	}
@@ -102,7 +106,7 @@ public abstract class Session extends Course implements Comparable<Session>,
 			this.url = new URL(urlString);
 		}
 		catch (MalformedURLException e) {
-			log(e);
+			//log(e);
 			throw new SessionException(e);
 		}
 	}

@@ -2,8 +2,8 @@ package com.sakserv.sis.studentinfo;
 
 public class Course {
 	
-	protected String department;
-	protected String number;
+	String department;
+	String number;
 	
 	public Course() {}
 	
@@ -46,7 +46,7 @@ public class Course {
 	
 	@Override
 	public String toString() {
-		return department + " " + number;
+		return this.department + " " + this.number;
 	}
 
 }
